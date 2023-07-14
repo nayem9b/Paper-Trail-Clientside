@@ -20,38 +20,38 @@ const Navbar = () => {
               <img className="w-10 h-15" alt=""></img>
 
               <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-                Anonna's Kitchen
+                Paper Trails
               </span>
             </Link>
             <ul className=" items-center hidden space-x-8 lg:flex">
               <div>
                 <Link
-                  to="/myreviews"
+                  to="/signup"
                   aria-label="My reviews"
                   title="My Reviews"
                   className="font-medium mr-5 tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
-                  My Reviews
+                  Sign up
                 </Link>
 
                 <Link
-                  to="/addservices"
+                  to="/signin"
                   aria-label="add_services"
                   title="Add Services"
                   className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
-                  Add Services
+                  Signin
                 </Link>
               </div>
 
               <li>
                 <Link
-                  to="/blogs"
+                  to="/addBook"
                   aria-label="About us"
                   title="Blogs"
                   className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
-                  Blogs
+                  Add a book
                 </Link>
               </li>
 
