@@ -2,14 +2,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { FormEvent } from "react";
+import { useAppDispatch } from "../../redux/hooks";
+import { createUser } from "../../redux/features/user/userSlice";
+type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
+interface SignUpFormInputs {
+  email: string;
+  password: string;
+}
 const SignUpForm = () => {
+  const dispatch = useAppDispatch();
+
   const handleSignUp = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
     const email = form?.email.value;
     const password = form?.password.value;
     console.log(email, password);
+    dispatch(createUser({ email: email, password: password }));
   };
   return (
     <div>

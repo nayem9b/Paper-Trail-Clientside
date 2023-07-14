@@ -23,7 +23,7 @@ const Navbar = () => {
                 Anonna's Kitchen
               </span>
             </Link>
-            <ul className="flex items-center hidden space-x-8 lg:flex">
+            <ul className=" items-center hidden space-x-8 lg:flex">
               <div>
                 <Link
                   to="/myreviews"
