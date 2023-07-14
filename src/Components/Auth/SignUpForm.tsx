@@ -1,6 +1,16 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import React, { FormEvent } from "react";
 
 const SignUpForm = () => {
+  const handleSignUp = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form?.email.value;
+    const password = form?.password.value;
+    console.log(email, password);
+  };
   return (
     <div>
       <section>
@@ -18,7 +28,7 @@ const SignUpForm = () => {
 
               <div className="mt-8">
                 <div className="mt-6">
-                  <form action="#" method="POST" className="space-y-6">
+                  <form className="space-y-6" onSubmit={handleSignUp}>
                     <div>
                       <label className="block text-sm font-medium text-neutral-600">
                         {" "}
@@ -67,13 +77,13 @@ const SignUpForm = () => {
                       </div>
 
                       <div className="text-sm">
-                        <a
+                        {/* <a
                           href="#"
                           className="font-medium text-blue-600 hover:text-blue-500"
                         >
                           {" "}
                           Forgot your password?{" "}
-                        </a>
+                        </a> */}
                       </div>
                     </div>
 
