@@ -4,8 +4,14 @@
 import React from "react";
 import { FormEvent } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useAppSelector } from "../../../redux/hooks";
+import { usePostBookMutation } from "../../../redux/features/product/productApi";
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
+
 const AddBook = () => {
+  const { user } = useAppSelector((state) => state.user);
+
+  const [postBook, { isError, isLoading, isSuccess }] = usePostBookMutation();
   const handleAddABook = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
@@ -14,14 +20,16 @@ const AddBook = () => {
     const genre = form.genre.value;
     const publicationDate = form.publicationDate.value;
     console.log(bookName);
-    toast.success("Successfully created!");
 
     const BooksInfo = {
-      bookName: bookName,
-      authorName: authorName,
+      title: bookName,
+      author: authorName,
       genre: genre,
       publicationDate: publicationDate,
+      postedBy: user.email,
     };
+
+    postBook(BooksInfo);
   };
   return (
     <div>
