@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -21,15 +24,38 @@ const AddBook = () => {
     const publicationDate = form.publicationDate.value;
     console.log(bookName);
 
-    const BooksInfo = {
-      title: bookName,
-      author: authorName,
-      genre: genre,
-      publicationDate: publicationDate,
-      postedBy: user.email,
-    };
+    const image = form.image.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
 
-    postBook(BooksInfo);
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_APP_IMG_BB_KEY
+    }`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          const BooksInfo = {
+            title: bookName,
+            author: authorName,
+            genre: genre,
+            publicationDate: publicationDate,
+            postedBy: user.email,
+            image: imgData.data.url,
+          };
+          try {
+            postBook(BooksInfo);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          console.log(imgData);
+        }
+      });
   };
   return (
     <div>
@@ -112,6 +138,9 @@ const AddBook = () => {
               <input
                 type="file"
                 className="file-input file-input-bordered w-full max-w-xs"
+                name="image"
+                accept="image/*"
+                required
               />
 
               {/* <div className="text-center md:w-3/12 md:pl-6">
