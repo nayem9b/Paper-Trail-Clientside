@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from "react";
 import { FormEvent } from "react";
+import toast, { Toaster } from "react-hot-toast";
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 const AddBook = () => {
   const handleAddABook = (event: FormEvent<HTMLFormElement>) => {
@@ -12,6 +13,8 @@ const AddBook = () => {
     const authorName = form.authorName.value;
     const genre = form.genre.value;
     const publicationDate = form.publicationDate.value;
+    console.log(bookName);
+    toast.success("Successfully created!");
 
     const BooksInfo = {
       bookName: bookName,

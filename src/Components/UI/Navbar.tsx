@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
   const [enabled, setEnabled] = useState(false);
 
   return (
@@ -54,7 +56,7 @@ const Navbar = () => {
                   Add a book
                 </Link>
               </li>
-
+              {user.email ? <h1>Hello</h1> : <h1>Bye</h1>}
               <li>
                 <Link
                   // onClick={handleLogout}
