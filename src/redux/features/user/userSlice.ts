@@ -18,7 +18,7 @@ interface IUserState {
   error: string | null;
 }
 
-interface Icredentials {
+interface ICredentials {
   email: string;
   password: string;
 }
@@ -34,9 +34,18 @@ const initialState: IUserState = {
 
 export const createUser = createAsyncThunk(
   "user/createUser",
-  async ({ email, password }: Icredentials) => {
+  async ({ email, password }: ICredentials) => {
     const data = await createUserWithEmailAndPassword(auth, email, password);
     console.log(auth, data);
+    return data.user.email;
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "user/loginUser",
+  async ({ email, password }: ICredentials) => {
+    const data = await signInWithEmailAndPassword(auth, email, password);
+
     return data.user.email;
   }
 );
