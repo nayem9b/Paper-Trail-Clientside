@@ -29,6 +29,15 @@ const productApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["books"],
+    }),
+    updateReview: builder.mutation({
+      query: ({ id, reviews }) => ({
+        url: `/api/v1/comment/${id}`,
+        method: "PATCH",
+        body: reviews,
+      }),
+      invalidatesTags: ["books"],
     }),
     deleteBook: builder.mutation({
       query: (id) => ({
@@ -46,5 +55,6 @@ export const {
   useGetSingleBookQuery,
   useUpdateBookMutation,
   useDeleteBookMutation,
+  useUpdateReviewMutation,
   useGetSearchedBooksQuery,
 } = productApi;

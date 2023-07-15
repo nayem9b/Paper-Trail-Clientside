@@ -69,7 +69,7 @@ const LandingPage = () => {
           </span>
         </form>
       </div>
-      {prevBookData.data.length > 0 && !searchTerm && (
+      {prevBookData?.data?.length > 0 && !searchTerm && (
         <div className="grid grid-cols-5 gap-10 mx-20">
           {prevBookData?.data.map((book) => (
             <BooksCard book={book}></BooksCard>

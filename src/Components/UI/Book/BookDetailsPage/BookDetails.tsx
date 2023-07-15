@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   useDeleteBookMutation,
   useGetSingleBookQuery,
+  useUpdateReviewMutation,
 } from "../../../../redux/features/product/productApi";
 import { useAppDispatch } from "../../../../redux/hooks";
 
@@ -24,7 +27,20 @@ const BookDetails = () => {
   //   console.log(deleteBook);
   //   dispatch(deleteBook(id));
   // };
+  const [updateReview] = useUpdateReviewMutation();
 
+  const handlePostComment = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const comment = form.comment.value;
+    console.log(comment);
+    const commentData = {
+      id: id,
+      reviews: { reviews: comment },
+    };
+    console.log(commentData.reviews);
+    await updateReview(commentData);
+  };
   return (
     <div>
       <section>
@@ -57,6 +73,19 @@ const BookDetails = () => {
                 </p>
                 {/* <p>{description}</p> */}
               </article>
+              <form onSubmit={handlePostComment}>
+                <label className="text-gray-700" for="name">
+                  <textarea
+                    className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    id="comment"
+                    placeholder="Enter your comment"
+                    name="comment"
+                    rows="5"
+                    cols="40"
+                  ></textarea>
+                </label>
+                <button className="px-3 py-1 bg-indigo-600">Submit</button>
+              </form>
             </div>
           </div>
         </div>
