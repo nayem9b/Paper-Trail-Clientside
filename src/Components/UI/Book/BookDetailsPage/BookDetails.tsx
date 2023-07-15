@@ -46,21 +46,23 @@ const BookDetails = () => {
     <div>
       <section>
         <div className="mx-auto max-w-screen-xl px-4  sm:px-6 sm:py-24 lg:px-8">
-          <div className="max-w-3xl">
-            <Link to={`/edit-details/${id}`}>
-              <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
-                <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                <span className="relative">Update Details</span>
+          {bookData?.postedBy === user.email && (
+            <div className="max-w-3xl">
+              <Link to={`/edit-details/${id}`}>
+                <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                  <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                  <span className="relative">Update Details</span>
+                </button>
+              </Link>
+              <button
+                className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
+                onClick={() => dispatch(deleteBook(id))}
+              >
+                <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                <span className="relative"> Delete book</span>
               </button>
-            </Link>
-            <button
-              className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
-              onClick={() => dispatch(deleteBook(id))}
-            >
-              <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
-              <span className="relative"> Delete book</span>
-            </button>
-          </div>
+            </div>
+          )}
 
           <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             <img

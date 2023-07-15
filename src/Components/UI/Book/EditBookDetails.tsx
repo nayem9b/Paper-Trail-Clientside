@@ -44,22 +44,17 @@ const UpdateBook = () => {
 
   return (
     <div>
-      <section className="h-screen bg-gray-100/50">
+      <section className="h-screen bg-gray-100/50 mt-20">
         <form
           onSubmit={handleUpdateBookInfo}
           className="container max-w-2xl mx-auto shadow-md md:w-3/4"
         >
-          <div className="p-4 border-t-2 border-indigo-400 rounded-lg bg-gray-100/5 ">
+          <div className="p-4 border-t-2 rounded-lg bg-gray-100/5 ">
             <div className="max-w-sm mx-auto md:w-full md:mx-0">
               <div className="inline-flex items-center space-x-4">
-                <a href="#" className="relative block">
-                  <img
-                    alt="profil"
-                    src="/images/person/1.jpg"
-                    className="mx-auto object-cover rounded-full h-16 w-16 "
-                  />
-                </a>
-                <h1 className="text-gray-600">Charlie</h1>
+                <h1 className="text-blue-600 text-4xl font-bold">
+                  Update Book Details
+                </h1>
               </div>
             </div>
           </div>
