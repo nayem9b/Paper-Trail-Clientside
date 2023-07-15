@@ -5,6 +5,7 @@ import SignUpForm from "../Components/Auth/SignUpForm";
 import LogInForm from "../Components/Auth/LoginForm";
 import UpdateBook from "../Components/UI/Book/UpdateBook";
 import AddBook from "../Components/UI/Book/AddBook";
+import BookDetails from "../Components/UI/Book/BookDetailsPage/BookDetails";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/addBook",
         element: <AddBook></AddBook>,
+      },
+      {
+        path: "/book-details/:id",
+        element: <BookDetails></BookDetails>,
       },
     ],
   },

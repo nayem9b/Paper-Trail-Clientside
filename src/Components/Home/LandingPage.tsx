@@ -1,9 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from "react";
+import { useGetBooksQuery } from "../../redux/features/product/productApi";
+import BooksCard from "../UI/Book/BooksCard";
 
 const LandingPage = () => {
+  const { data } = useGetBooksQuery(undefined);
+  const bookData = data.data;
   return (
     <div>
-      <h1 className="bg-red-300">Landing</h1>
+      <div className="grid grid-cols-5 gap-10 mx-20">
+        {bookData.map((book) => (
+          <BooksCard book={book}></BooksCard>
+        ))}
+      </div>
     </div>
   );
 };
