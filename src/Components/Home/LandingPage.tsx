@@ -35,7 +35,7 @@ const LandingPage = () => {
 
   return (
     <div>
-      <div className="relative">
+      <div className="mx-auto relative w-2/4 mt-6 mb-6">
         <form onSubmit={handleSearch}>
           <label className="sr-only"> Search </label>
 

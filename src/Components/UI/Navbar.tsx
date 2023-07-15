@@ -6,12 +6,15 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useGetSearchedBooksQuery } from "../../redux/features/product/productApi";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Firebase/firebase";
+import { setUser } from "../../redux/features/user/userSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [search, setSearch] = useState();
   const { user } = useAppSelector((state) => state.user);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   // const [enabled, setEnabled] = useState(false);
   // const handleSearch = (event) => {
   //   event.preventDefault();
@@ -25,6 +28,13 @@ const Navbar = () => {
   // const { data, isLoading, isError } = useGetSearchedBooksQuery(search);
 
   // console.log(data);
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      dispatch(setUser(null));
+    });
+  };
+
   return (
     <div>
       <div>
@@ -45,71 +55,54 @@ const Navbar = () => {
             {/* Search Field */}
             <div className="relative"></div>
             <ul className=" items-center hidden space-x-8 lg:flex">
-              <div>
-                <Link
-                  to="/signup"
-                  aria-label="My reviews"
-                  title="My Reviews"
-                  className="font-medium mr-5 tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                >
-                  Sign up
-                </Link>
-
-                <Link
-                  to="/signin"
-                  aria-label="add_services"
-                  title="Add Services"
-                  className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                >
-                  Signin
-                </Link>
-              </div>
-
-              <li>
-                <Link
-                  to="/addBook"
-                  aria-label="About us"
-                  title="Blogs"
-                  className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                >
-                  Add a book
-                </Link>
-              </li>
-              {user.email ? <h1>Hello</h1> : <h1>Bye</h1>}
-              <li>
-                <Link
-                  // onClick={handleLogout}
-                  to="/"
-                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                  aria-label="Log out"
-                  title="Log out"
-                >
-                  Log out
-                </Link>
-              </li>
-
-              <>
-                <li>
-                  <Link
-                    to="/signin"
-                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none "
-                    aria-label="Sign In"
-                    title="Sign In"
-                  >
-                    Sign In
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/signup"
-                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-black text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                    aria-label="Sign up"
-                    title="Sign up"
-                  >
-                    Sign up
-                  </Link>
-                </li>
-              </>
+              {user.email ? (
+                <>
+                  <li>
+                    <Link
+                      to="/addBook"
+                      aria-label="About us"
+                      title="Blogs"
+                      className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    >
+                      Add a book
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={handleLogout}
+                      to="/"
+                      className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                      aria-label="Log out"
+                      title="Log out"
+                    >
+                      Log out
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      to="/signin"
+                      className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none "
+                      aria-label="Sign In"
+                      title="Sign In"
+                    >
+                      Sign In
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/signup"
+                      className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-black text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                      aria-label="Sign up"
+                      title="Sign up"
+                    >
+                      Sign up
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
             <div className="lg:hidden">
               <button
@@ -150,7 +143,7 @@ const Navbar = () => {
                             alt="Anonna`s Kitchen"
                           />
                           <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-                            Anonna's Kitchen
+                            Paper trails
                           </span>
                         </a>
                       </div>
@@ -217,15 +210,17 @@ const Navbar = () => {
                               Add Services
                             </Link>
                           </li>{" "}
-                          <Link
-                            // onClick={handleLogout}
-                            to="/"
-                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide bg-black text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                            aria-label="Log out"
-                            title="Log out"
-                          >
-                            Log out
-                          </Link>
+                          {user.email && (
+                            <Link
+                              onClick={handleLogout}
+                              to="/"
+                              className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide bg-black text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                              aria-label="Log out"
+                              title="Log out"
+                            >
+                              Log out
+                            </Link>
+                          )}
                         </>
 
                         <>

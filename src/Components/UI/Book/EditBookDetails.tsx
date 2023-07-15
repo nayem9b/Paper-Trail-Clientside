@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "../../../redux/features/product/productApi";
 import { FormEvent } from "react";
+import { toast } from "react-hot-toast";
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 const UpdateBook = () => {
@@ -14,7 +15,7 @@ const UpdateBook = () => {
   const { data } = useGetSingleBookQuery(id);
   const bookData = data?.data[0];
   const { author, genre, publicationDate, title } = bookData;
-
+  const navigate = useNavigate();
   const [updateBook, { isLoading, isError, isSuccess }] =
     useUpdateBookMutation();
 
@@ -37,6 +38,8 @@ const UpdateBook = () => {
     };
     console.log(newData);
     await updateBook(newData);
+    toast.success("Updated Book Data");
+    navigate("/");
   };
 
   return (
@@ -62,7 +65,7 @@ const UpdateBook = () => {
           </div>
           <div className="space-y-6 bg-white">
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-              <h2 className="max-w-sm mx-auto md:w-1/3">Book Name</h2>
+              <h2 className="max-w-sm mx-auto md:w-1/3">Book Name:</h2>
               <div className="max-w-sm mx-auto md:w-2/3">
                 <div className=" relative ">
                   <input
@@ -74,42 +77,42 @@ const UpdateBook = () => {
                 </div>
               </div>
             </div>
-            <hr />
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-              <h2 className="max-w-sm mx-auto md:w-1/3">Other Info</h2>
-              <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-                <div>
-                  <div className=" relative ">
-                    <input
-                      type="text"
-                      id="user-info-name"
-                      className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                      placeholder={author}
-                      name="authorName"
-                    />
-                  </div>
+              <h2 className="max-w-sm mx-auto md:w-1/3">Author:</h2>
+              <div className="max-w-sm mx-auto md:w-2/3">
+                <div className=" relative ">
+                  <input
+                    type="text"
+                    name="authorName"
+                    className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder={author}
+                  />
                 </div>
-                <div>
-                  <div className=" relative ">
-                    <input
-                      type="text"
-                      id="user-info-name"
-                      className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                      placeholder={genre}
-                      name="genre"
-                    />
-                  </div>
+              </div>
+            </div>
+            <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+              <h2 className="max-w-sm mx-auto md:w-1/3">Genre:</h2>
+              <div className="max-w-sm mx-auto md:w-2/3">
+                <div className=" relative ">
+                  <input
+                    type="text"
+                    name="genre"
+                    className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder={genre}
+                  />
                 </div>
-                <div>
-                  <div className=" relative ">
-                    <input
-                      type="text"
-                      id="user-info-phone"
-                      className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                      placeholder={publicationDate}
-                      name="publicationDate"
-                    />
-                  </div>
+              </div>
+            </div>
+            <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+              <h2 className="max-w-sm mx-auto md:w-1/3">Publication Date:</h2>
+              <div className="max-w-sm mx-auto md:w-2/3">
+                <div className=" relative ">
+                  <input
+                    type="text"
+                    name="publicationDate"
+                    className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder={publicationDate}
+                  />
                 </div>
               </div>
             </div>
