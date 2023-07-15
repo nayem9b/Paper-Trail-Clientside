@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useGetSingleBookQuery } from "../../../../redux/features/product/productApi";
+import {
+  useDeleteBookMutation,
+  useGetSingleBookQuery,
+} from "../../../../redux/features/product/productApi";
+import { useAppDispatch } from "../../../../redux/hooks";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -9,8 +13,18 @@ const BookDetails = () => {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
+  console.log(id);
+  const dispatch = useAppDispatch();
+  const [deleteBook, { isLoading, isError, isSuccess }] =
+    useDeleteBookMutation();
   const bookData = data?.data[0];
   console.log(bookData);
+  // const handleDelete = async (id?: string) => {
+  //   console.log(id);
+  //   console.log(deleteBook);
+  //   dispatch(deleteBook(id));
+  // };
+
   return (
     <div>
       <section>
@@ -20,6 +34,10 @@ const BookDetails = () => {
               {bookData?.author}
             </h2>
             <Link to={`/edit-details/${id}`}>Update Book Details</Link>
+            <button onClick={() => dispatch(deleteBook(id))}>
+              {" "}
+              Delete book
+            </button>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">

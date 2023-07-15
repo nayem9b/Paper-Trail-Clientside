@@ -4,7 +4,9 @@ import { useGetBooksQuery } from "../../redux/features/product/productApi";
 import BooksCard from "../UI/Book/BooksCard";
 
 const LandingPage = () => {
-  const { data } = useGetBooksQuery(undefined);
+  const { data } = useGetBooksQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
   const bookData = data?.data;
   return (
     <div>

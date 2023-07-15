@@ -18,7 +18,7 @@ const UpdateBook = () => {
   const [updateBook, { isLoading, isError, isSuccess }] =
     useUpdateBookMutation();
 
-  const handleUpdateBookInfo = (event: FormEvent<HTMLFormElement>) => {
+  const handleUpdateBookInfo = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
     const updateBookName = form.bookName.value;
@@ -35,8 +35,8 @@ const UpdateBook = () => {
         publicationDate: updatePublicationDate,
       },
     };
-
-    updateBook(newData);
+    console.log(newData);
+    await updateBook(newData);
   };
 
   return (
