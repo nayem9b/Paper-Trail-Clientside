@@ -16,6 +16,7 @@ const productApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["books"],
     }),
     updateBook: builder.mutation({
       query: ({ id, data }) => ({
@@ -23,6 +24,7 @@ const productApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["books"],
     }),
   }),
 });
