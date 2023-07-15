@@ -17,8 +17,19 @@ const productApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    updateBook: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/api/v1/books/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetBooksQuery, usePostBookMutation, useGetSingleBookQuery } =
-  productApi;
+export const {
+  useGetBooksQuery,
+  usePostBookMutation,
+  useGetSingleBookQuery,
+  useUpdateBookMutation,
+} = productApi;

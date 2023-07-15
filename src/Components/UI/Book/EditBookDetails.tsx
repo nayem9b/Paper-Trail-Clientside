@@ -1,19 +1,49 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetSingleBookQuery } from "../../../redux/features/product/productApi";
+import {
+  useGetSingleBookQuery,
+  useUpdateBookMutation,
+} from "../../../redux/features/product/productApi";
+import { FormEvent } from "react";
+type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 const UpdateBook = () => {
   const { id } = useParams();
   const { data } = useGetSingleBookQuery(id);
   const bookData = data?.data[0];
   const { author, genre, publicationDate, title } = bookData;
-  console.log(author, genre, publicationDate, title);
+
+  const [updateBook, { isLoading, isError, isSuccess }] =
+    useUpdateBookMutation();
+
+  const handleUpdateBookInfo = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.target;
+    const updateBookName = form.bookName.value;
+    const updateAuthorName = form.authorName.value;
+    const updateGenre = form.genre.value;
+    const updatePublicationDate = form.publicationDate.value;
+
+    const newData = {
+      id: id,
+      data: {
+        title: updateBookName,
+        author: updateAuthorName,
+        genre: updateGenre,
+        publicationDate: updatePublicationDate,
+      },
+    };
+
+    updateBook(newData);
+  };
 
   return (
     <div>
       <section className="h-screen bg-gray-100/50">
         <form
-          // onSubmit={handleAddABook}
+          onSubmit={handleUpdateBookInfo}
           className="container max-w-2xl mx-auto shadow-md md:w-3/4"
         >
           <div className="p-4 border-t-2 border-indigo-400 rounded-lg bg-gray-100/5 ">
@@ -83,28 +113,7 @@ const UpdateBook = () => {
                 </div>
               </div>
             </div>
-            <hr />
-            <div className="items-center w-full p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-              <h2 className="max-w-sm mx-auto md:w-4/12">Book's Cover</h2>
 
-              <input
-                type="file"
-                className="file-input file-input-bordered w-full max-w-xs"
-                name="image"
-                accept="image/*"
-                required
-              />
-
-              {/* <div className="text-center md:w-3/12 md:pl-6">
-                <button
-                  type="button"
-                  className="py-2 px-4  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-                >
-                  Change
-                </button>
-              </div> */}
-            </div>
-            <hr />
             <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3">
               <button
                 type="submit"
