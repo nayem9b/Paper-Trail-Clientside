@@ -21,10 +21,10 @@ const UpdateBook = () => {
   const handleUpdateBookInfo = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
-    const updateBookName = form.bookName.value;
-    const updateAuthorName = form.authorName.value;
-    const updateGenre = form.genre.value;
-    const updatePublicationDate = form.publicationDate.value;
+    const updateBookName = form.bookName.value || title;
+    const updateAuthorName = form.authorName.value || author;
+    const updateGenre = form.genre.value || genre;
+    const updatePublicationDate = form.publicationDate.value || publicationDate;
 
     const newData = {
       id: id,
