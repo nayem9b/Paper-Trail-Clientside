@@ -37,19 +37,22 @@ const LandingPage = () => {
     <div>
       <div className="mx-auto relative w-2/4 mt-6 mb-6">
         <form onSubmit={handleSearch}>
-          <label className="sr-only"> Search </label>
+          <label className="sr-only ml-4"> Search </label>
 
           <input
             type="text"
             id="Search"
             name="search"
             placeholder="Search for..."
-            className="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
+            className="w-full ml-4 rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
           />
 
-          <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
-            <button type="button" className="text-gray-600 hover:text-gray-700">
-              <span className="sr-only">Search</span>
+          <span className="absolute inset-y-0 end-0 grid w-10 place-content-center ml-4">
+            <button
+              type="button"
+              className="text-gray-600 hover:text-gray-700 ml-4"
+            >
+              <span className="sr-only ml-4">Search</span>
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"

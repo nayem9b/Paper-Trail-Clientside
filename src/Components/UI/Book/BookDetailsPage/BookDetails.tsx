@@ -9,6 +9,7 @@ import {
   useUpdateReviewMutation,
 } from "../../../../redux/features/product/productApi";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { toast } from "react-hot-toast";
 
 const BookDetails = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -41,6 +42,8 @@ const BookDetails = () => {
     };
     console.log(commentData.reviews);
     await updateReview(commentData);
+    toast.success("Review added");
+    form.reset();
   };
   return (
     <div>
@@ -98,6 +101,24 @@ const BookDetails = () => {
                   <button className="px-3 py-1 bg-indigo-600">Submit</button>
                 </form>
               )}
+              <article className="flex flex-col gap-4 rounded-lg mt-10 ">
+                <h1 className="text-3xl font-bold">Reviews ✨</h1>
+                <div>
+                  {bookData?.reviews.length > 0 ? (
+                    <div>
+                      <strong className="block text-sm font-medium text-gray-500">
+                        {" "}
+                        Anonymous User:{" "}
+                      </strong>
+                      <span className="text-2xl font-medium text-gray-900">
+                        {bookData?.reviews}
+                      </span>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </article>
             </div>
           </div>
         </div>

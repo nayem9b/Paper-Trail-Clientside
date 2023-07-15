@@ -14,6 +14,7 @@ const productApi = api.injectEndpoints({
     }),
     getSingleBook: builder.query({
       query: (id) => `/api/v1/books/${id}`,
+      providesTags: ["books"],
     }),
     postBook: builder.mutation({
       query: (data) => ({
