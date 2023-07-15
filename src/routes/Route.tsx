@@ -3,7 +3,7 @@ import Root from "../Root/Root";
 import LandingPage from "../Components/Home/LandingPage";
 import SignUpForm from "../Components/Auth/SignUpForm";
 import LogInForm from "../Components/Auth/LoginForm";
-import UpdateBook from "../Components/UI/Book/UpdateBook";
+import UpdateBook from "../Components/UI/Book/EditBookDetails";
 import AddBook from "../Components/UI/Book/AddBook";
 import BookDetails from "../Components/UI/Book/BookDetailsPage/BookDetails";
 
@@ -25,16 +25,16 @@ export const router = createBrowserRouter([
         element: <LogInForm></LogInForm>,
       },
       {
-        path: "/update",
-        element: <UpdateBook></UpdateBook>,
-      },
-      {
         path: "/addBook",
         element: <AddBook></AddBook>,
       },
       {
         path: "/book-details/:id",
         element: <BookDetails></BookDetails>,
+      },
+      {
+        path: "/edit-details/:id",
+        element: <UpdateBook></UpdateBook>,
       },
     ],
   },
