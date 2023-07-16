@@ -55,6 +55,16 @@ const Navbar = () => {
             {/* Search Field */}
             <div className="relative"></div>
             <ul className=" items-center hidden space-x-8 lg:flex">
+              <li>
+                <Link
+                  to="/"
+                  className="text-lg font-semibold"
+                  aria-label="Sign In"
+                  title="All books"
+                >
+                  All Books
+                </Link>
+              </li>
               {user.email ? (
                 <>
                   <li>

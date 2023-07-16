@@ -21,10 +21,20 @@ const LogInForm = () => {
     const email = form?.email.value;
     const password = form?.password.value;
     console.log(email, password);
-    await dispatch(loginUser({ email: email, password: password }));
-    toast.success("Logged in");
-    form.reset();
-    navigate("/");
+    try {
+      const logger = await dispatch(
+        loginUser({ email: email, password: password })
+      );
+      if (logger?.error?.name) {
+        toast.error("Failed to login");
+      } else {
+        toast.success("Logged in");
+        form.reset();
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

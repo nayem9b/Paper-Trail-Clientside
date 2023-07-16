@@ -22,10 +22,14 @@ const SignUpForm = () => {
     const email = form?.email.value;
     const password = form?.password.value;
     console.log(email, password);
-    await dispatch(createUser({ email: email, password: password }));
-    toast.success("Welcome Abroad");
-    form.reset();
-    navigate("/");
+    try {
+      await dispatch(createUser({ email: email, password: password }));
+      toast.success("Welcome Abroad");
+      form.reset();
+      navigate("/");
+    } catch (error) {
+      toast.error("Signup failed");
+    }
   };
   return (
     <div>
