@@ -36,6 +36,13 @@ const productApi = api.injectEndpoints({
       }),
       invalidatesTags: ["books"],
     }),
+    updateWishlist: builder.mutation({
+      query: ({ id, ...status }) => ({
+        url: `/api/v1/wishlist/${id}`,
+        method: "PATCH",
+        body: status,
+      }),
+    }),
     updateBook: builder.mutation({
       query: ({ id, data }) => ({
         url: `/api/v1/books/${id}`,
@@ -72,4 +79,5 @@ export const {
   useGetSearchedBooksQuery,
   usePostWishlistMutation,
   useGetWishlistQuery,
+  useUpdateWishlistMutation,
 } = productApi;

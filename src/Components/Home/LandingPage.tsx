@@ -28,8 +28,9 @@ const LandingPage = () => {
     isError,
   } = useGetSearchedBooksQuery(searchTerm);
 
-  const { data: prevBookData } = useGetBooksQuery(undefined, {
+  const { data: prevBookData } = useGetBooksQuery({
     refetchOnMountOrArgChange: true,
+    pollingInterval: 10000,
   });
   console.log(prevBookData, searchedBookData);
 

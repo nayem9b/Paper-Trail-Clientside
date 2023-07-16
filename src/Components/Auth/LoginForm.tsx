@@ -15,14 +15,15 @@ interface SignUpFormInputs {
 const LogInForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const handleSignUp = (event: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
     const email = form?.email.value;
     const password = form?.password.value;
     console.log(email, password);
-    dispatch(loginUser({ email: email, password: password }));
+    await dispatch(loginUser({ email: email, password: password }));
     toast.success("Logged in");
+    form.reset();
     navigate("/");
   };
   return (

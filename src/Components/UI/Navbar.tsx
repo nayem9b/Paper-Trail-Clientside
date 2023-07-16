@@ -69,12 +69,22 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      to={`/wishlist/${user?.email}`}
+                      to={`/wishlist`}
                       aria-label="About us"
                       title="Blogs"
                       className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                     >
                       Wishlist
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={`/readlist`}
+                      aria-label="About us"
+                      title="Blogs"
+                      className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    >
+                      Readlist
                     </Link>
                   </li>
                   <li>

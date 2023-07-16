@@ -16,14 +16,15 @@ const SignUpForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSignUp = (event: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
     const email = form?.email.value;
     const password = form?.password.value;
     console.log(email, password);
-    dispatch(createUser({ email: email, password: password }));
+    await dispatch(createUser({ email: email, password: password }));
     toast.success("Welcome Abroad");
+    form.reset();
     navigate("/");
   };
   return (

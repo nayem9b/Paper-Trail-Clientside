@@ -7,6 +7,7 @@ import UpdateBook from "../Components/UI/Book/EditBookDetails";
 import AddBook from "../Components/UI/Book/AddBook";
 import BookDetails from "../Components/UI/Book/BookDetailsPage/BookDetails";
 import Wishlist from "../Components/UI/Book/Wishlist/Wishlist";
+import Readlist from "../Components/UI/Readlist/Readlist";
 
 export const router = createBrowserRouter([
   {
@@ -18,10 +19,12 @@ export const router = createBrowserRouter([
         element: <LandingPage></LandingPage>,
       },
       {
-        path: "/wishlist/:id",
+        path: "/wishlist",
         element: <Wishlist></Wishlist>,
-        loader: ({ params }) =>
-          fetch(`http://localhost:8000/api/v1/wishlist/${params?.id}`),
+      },
+      {
+        path: "/readlist",
+        element: <Readlist></Readlist>,
       },
       {
         path: "/signUp",

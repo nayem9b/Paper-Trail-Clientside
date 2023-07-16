@@ -58,9 +58,14 @@ const BookDetails = () => {
       image: bookData?.image,
       user: user?.email,
     };
-    await postWishlist(wishListInfo);
-    toast.success("Added to wishlist");
-    navigate("/wishlist");
+    if (user?.email) {
+      await postWishlist(wishListInfo);
+      toast.success("Added to wishlist");
+
+      navigate(`/wishlist`);
+    } else {
+      navigate(`/signUp`);
+    }
   };
 
   return (
@@ -99,16 +104,17 @@ const BookDetails = () => {
                   </div>
                 </form>
               </dialog>
-              <button
-                className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
-                onClick={handleAddToWishlist}
-              >
-                <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
-                <span className="relative"> Wishlist</span>
-              </button>
+
               {/* Open the modal using ID.showModal() method */}
             </div>
           )}
+          <button
+            className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
+            onClick={handleAddToWishlist}
+          >
+            <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+            <span className="relative"> Wishlist</span>
+          </button>
 
           <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             <img
