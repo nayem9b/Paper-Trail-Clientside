@@ -18,8 +18,10 @@ export const router = createBrowserRouter([
         element: <LandingPage></LandingPage>,
       },
       {
-        path: "/wishlist",
+        path: "/wishlist/:id",
         element: <Wishlist></Wishlist>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:8000/api/v1/wishlist/${params?.id}`),
       },
       {
         path: "/signUp",

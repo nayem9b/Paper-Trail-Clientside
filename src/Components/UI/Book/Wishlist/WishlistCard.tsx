@@ -1,6 +1,7 @@
 import React from "react";
 
-const WishlistCard = () => {
+const WishlistCard = ({ wish }) => {
+  const { title, author, genre, publicationDate, image } = wish;
   return (
     <div>
       <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
@@ -23,7 +24,7 @@ const WishlistCard = () => {
       </button>
 
       <img
-        src="https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80"
+        src={image}
         alt=""
         className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
       />
@@ -33,9 +34,9 @@ const WishlistCard = () => {
           New
         </span>
 
-        <h3 className="mt-4 text-lg font-medium text-gray-900">Robot Toy</h3>
+        <h3 className="mt-4 text-lg font-medium text-gray-900">{title}</h3>
 
-        <p className="mt-1.5 text-sm text-gray-700">$14.99</p>
+        <p className="mt-1.5 text-sm text-gray-700">{author}</p>
 
         <form className="mt-4">
           <button className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
