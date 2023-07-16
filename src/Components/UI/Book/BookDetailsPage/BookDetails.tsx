@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useDeleteBookMutation,
   useGetSingleBookQuery,
@@ -21,6 +21,7 @@ const BookDetails = () => {
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [deleteBook, { isLoading, isError, isSuccess }] =
     useDeleteBookMutation();
   const [postWishlist] = usePostWishlistMutation();
@@ -59,6 +60,7 @@ const BookDetails = () => {
     };
     await postWishlist(wishListInfo);
     toast.success("Added to wishlist");
+    navigate("/wishlist");
   };
 
   return (
@@ -66,7 +68,7 @@ const BookDetails = () => {
       <section>
         <div className="mx-auto max-w-screen-xl px-4  sm:px-6 sm:py-24 lg:px-8">
           {bookData?.postedBy === user.email && (
-            <div className="max-w-3xl">
+            <div className="max-w-3xl flex gap-5">
               <Link to={`/edit-details/${id}`}>
                 <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
                   <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
@@ -74,12 +76,29 @@ const BookDetails = () => {
                 </button>
               </Link>
               <button
-                className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
-                onClick={() => dispatch(deleteBook(id))}
+                className="btn bg-red-400"
+                onClick={() => window.my_modal_5.showModal()}
               >
-                <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
-                <span className="relative"> Delete book</span>
+                Delete Book
               </button>
+              <dialog
+                id="my_modal_5"
+                className="modal modal-bottom sm:modal-middle"
+              >
+                <form method="dialog" className="modal-box">
+                  <p className="py-4">You sure, you want to delete this?</p>
+                  <div className="modal-action">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button
+                      className="btn bg-red-500 text-white hover:bg-red-700"
+                      onClick={() => dispatch(deleteBook(id))}
+                    >
+                      sure, confirm delation
+                    </button>
+                    <button className="btn">Close</button>
+                  </div>
+                </form>
+              </dialog>
               <button
                 className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
                 onClick={handleAddToWishlist}
@@ -87,6 +106,7 @@ const BookDetails = () => {
                 <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
                 <span className="relative"> Wishlist</span>
               </button>
+              {/* Open the modal using ID.showModal() method */}
             </div>
           )}
 
@@ -113,7 +133,7 @@ const BookDetails = () => {
                 <form onSubmit={handlePostComment}>
                   <label className="text-gray-700" for="name">
                     <textarea
-                      className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mt-5"
                       id="comment"
                       placeholder="Enter your comment"
                       name="comment"
@@ -121,7 +141,9 @@ const BookDetails = () => {
                       cols="40"
                     ></textarea>
                   </label>
-                  <button className="px-3 py-1 bg-indigo-600">Submit</button>
+                  <button className="px-4 py-2 rounded-lg bg-indigo-600 text-white">
+                    Submit
+                  </button>
                 </form>
               )}
               <article className="flex flex-col gap-4 rounded-lg mt-10 ">

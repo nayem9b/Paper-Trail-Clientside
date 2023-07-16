@@ -68,9 +68,8 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                  <li>
                     <Link
-                      to="/addBook"
+                      to="/wishlist"
                       aria-label="About us"
                       title="Blogs"
                       className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"

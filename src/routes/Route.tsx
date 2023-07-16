@@ -6,6 +6,7 @@ import LogInForm from "../Components/Auth/LoginForm";
 import UpdateBook from "../Components/UI/Book/EditBookDetails";
 import AddBook from "../Components/UI/Book/AddBook";
 import BookDetails from "../Components/UI/Book/BookDetailsPage/BookDetails";
+import Wishlist from "../Components/UI/Book/Wishlist/Wishlist";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage></LandingPage>,
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist></Wishlist>,
       },
       {
         path: "/signUp",
