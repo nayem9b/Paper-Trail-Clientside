@@ -13,7 +13,7 @@ import {
   usePostWishlistMutation,
   useUpdateReviewMutation,
 } from "../../../../redux/features/product/productApi";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "../../../../redux/hooks";
 import { toast } from "react-hot-toast";
 
 const BookDetails = () => {
@@ -24,7 +24,6 @@ const BookDetails = () => {
     pollingInterval: 30000,
   });
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [deleteBook] = useDeleteBookMutation();
   const [postWishlist] = usePostWishlistMutation();
