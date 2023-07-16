@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import {
   useDeleteBookMutation,
   useGetSingleBookQuery,
+  usePostWishlistMutation,
   useUpdateReviewMutation,
 } from "../../../../redux/features/product/productApi";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
@@ -22,6 +23,7 @@ const BookDetails = () => {
   const dispatch = useAppDispatch();
   const [deleteBook, { isLoading, isError, isSuccess }] =
     useDeleteBookMutation();
+  const [postWishlist] = usePostWishlistMutation();
   const bookData = data?.data[0];
   console.log(bookData);
   // const handleDelete = async (id?: string) => {
@@ -45,6 +47,20 @@ const BookDetails = () => {
     toast.success("Review added");
     form.reset();
   };
+
+  const handleAddToWishlist = async () => {
+    const wishListInfo = {
+      title: bookData?.title,
+      author: bookData?.author,
+      publicationDate: bookData?.publicationDate,
+      genre: bookData?.genre,
+      image: bookData?.image,
+      user: user?.email,
+    };
+    await postWishlist(wishListInfo);
+    toast.success("Added to wishlist");
+  };
+
   return (
     <div>
       <section>
@@ -63,6 +79,13 @@ const BookDetails = () => {
               >
                 <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
                 <span className="relative"> Delete book</span>
+              </button>
+              <button
+                className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
+                onClick={handleAddToWishlist}
+              >
+                <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                <span className="relative"> Wishlist</span>
               </button>
             </div>
           )}
