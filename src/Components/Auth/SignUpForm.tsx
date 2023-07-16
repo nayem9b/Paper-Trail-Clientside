@@ -1,22 +1,19 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import React, { FormEvent } from "react";
+/* eslint-disable */
+
 import { useAppDispatch } from "../../redux/hooks";
 import { createUser } from "../../redux/features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
-interface SignUpFormInputs {
-  email: string;
-  password: string;
-}
 const SignUpForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSignUp = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (event: any) => {
     event.preventDefault();
     const form = event.target;
     const email = form?.email.value;

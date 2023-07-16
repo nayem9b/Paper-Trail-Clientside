@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from "react";
-import { useParams } from "react-router-dom";
+
 import { useGetWishlistQuery } from "../../../../redux/features/product/productApi";
 import WishlistCard from "./WishlistCard";
 import { useAppSelector } from "../../../../redux/hooks";
@@ -18,7 +17,7 @@ const Wishlist = () => {
   return (
     <div className="my-auto mx-auto mt-10">
       <div className="grid grid-cols-1 lg:grid-cols-5 mx-20 gap-10 ">
-        {wishlist?.map((wish) => (
+        {wishlist?.map((wish: { user: string | null }) => (
           <>
             {wish?.user === user.email ? (
               <>

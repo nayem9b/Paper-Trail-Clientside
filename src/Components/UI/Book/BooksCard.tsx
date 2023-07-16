@@ -1,7 +1,10 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import { Link } from "react-router-dom";
 
-const BooksCard = ({ book }) => {
+const BooksCard = ({ book }: any) => {
   return (
     <div>
       <Link to={`/book-details/${book._id}`}>

@@ -1,18 +1,18 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { useGetSearchedBooksQuery } from "../../redux/features/product/productApi";
+
 import { signOut } from "firebase/auth";
 import { auth } from "../../Firebase/firebase";
 import { setUser } from "../../redux/features/user/userSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [search, setSearch] = useState();
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   // const [enabled, setEnabled] = useState(false);

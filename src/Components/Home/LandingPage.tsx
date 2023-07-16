@@ -1,20 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from "react";
+
 import {
   useGetBooksQuery,
   useGetSearchedBooksQuery,
 } from "../../redux/features/product/productApi";
 import BooksCard from "../UI/Book/BooksCard";
-import { useAppSelector } from "../../redux/hooks";
+
 import { useState } from "react";
 
 const LandingPage = () => {
   const [searchTerm, setSearch] = useState();
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: { preventDefault: () => void; target: any }) => {
     event.preventDefault();
     const form = event.target;
     const search = form.search.value;
@@ -22,11 +23,7 @@ const LandingPage = () => {
     console.log(search);
   };
 
-  const {
-    data: searchedBookData,
-    isLoading,
-    isError,
-  } = useGetSearchedBooksQuery(searchTerm);
+  const { data: searchedBookData } = useGetSearchedBooksQuery(searchTerm);
 
   const { data: prevBookData } = useGetBooksQuery({
     refetchOnMountOrArgChange: true,
@@ -75,14 +72,14 @@ const LandingPage = () => {
       </div>
       {prevBookData?.data?.length > 0 && !searchTerm && (
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:mx-20 mx-5">
-          {prevBookData?.data.map((book) => (
+          {prevBookData?.data.map((book: any) => (
             <BooksCard book={book}></BooksCard>
           ))}
         </div>
       )}
       {searchTerm && (
         <div className="grid grid-cols-5 gap-10 mx-20">
-          {searchedBookData?.data.map((book) => (
+          {searchedBookData?.data.map((book: any) => (
             <BooksCard book={book}></BooksCard>
           ))}
         </div>

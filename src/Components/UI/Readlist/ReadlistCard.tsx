@@ -1,7 +1,7 @@
-import React from "react";
-
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// @ts-ignore
 const ReadlistCard = ({ wish }) => {
-  const { title, author, genre, publicationDate, image, _id } = wish;
+  const { title, author, image } = wish;
   return (
     <div>
       <div>

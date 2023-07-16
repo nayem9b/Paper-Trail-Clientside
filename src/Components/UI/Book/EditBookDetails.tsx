@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import React from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "../../../redux/features/product/productApi";
-import { FormEvent } from "react";
 import { toast } from "react-hot-toast";
-type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 const UpdateBook = () => {
   const { id } = useParams();
@@ -16,10 +16,9 @@ const UpdateBook = () => {
   const bookData = data?.data[0];
   const { author, genre, publicationDate, title } = bookData;
   const navigate = useNavigate();
-  const [updateBook, { isLoading, isError, isSuccess }] =
-    useUpdateBookMutation();
+  const [updateBook] = useUpdateBookMutation();
 
-  const handleUpdateBookInfo = async (event: FormEvent<HTMLFormElement>) => {
+  const handleUpdateBookInfo = async (event: any) => {
     event.preventDefault();
     const form = event.target;
     const updateBookName = form.bookName.value || title;

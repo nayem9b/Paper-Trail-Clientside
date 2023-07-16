@@ -1,19 +1,14 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { useUpdateWishlistMutation } from "../../../../redux/features/product/productApi";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const WishlistCard = ({ wish }) => {
-  const { title, author, genre, publicationDate, image, _id } = wish;
+const WishlistCard = ({ wish }: any) => {
+  const { title, author, image, _id } = wish;
   const navigate = useNavigate();
   const [updateWishlist] = useUpdateWishlistMutation();
-
-  // const handleAddStatus = (event) => {
-  //   event.preventDefault();
-  //   const form = event.target;
-  //   const status = form.reading.textContent;
-  //   console.log(status);
-  // };
 
   const setWillReadStatusToDB = async () => {
     const updatedData = {

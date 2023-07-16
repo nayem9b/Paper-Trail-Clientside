@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from "react";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useDeleteBookMutation,
@@ -22,19 +26,16 @@ const BookDetails = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [deleteBook, { isLoading, isError, isSuccess }] =
-    useDeleteBookMutation();
+  const [deleteBook] = useDeleteBookMutation();
   const [postWishlist] = usePostWishlistMutation();
   const bookData = data?.data[0];
   console.log(bookData);
-  // const handleDelete = async (id?: string) => {
-  //   console.log(id);
-  //   console.log(deleteBook);
-  //   dispatch(deleteBook(id));
-  // };
   const [updateReview] = useUpdateReviewMutation();
 
-  const handlePostComment = async (event) => {
+  const handlePostComment = async (event: {
+    preventDefault: () => void;
+    target: any;
+  }) => {
     event.preventDefault();
     const form = event.target;
     const comment = form.comment.value;
@@ -67,6 +68,9 @@ const BookDetails = () => {
       navigate(`/signUp`);
     }
   };
+  const handleDeleteBook = async () => {
+    +(await deleteBook(id));
+  };
 
   return (
     <div>
@@ -82,7 +86,7 @@ const BookDetails = () => {
               </Link>
               <button
                 className="btn bg-red-400"
-                onClick={() => window.my_modal_5.showModal()}
+                onClick={() => (window as any).my_modal_5.showModal()}
               >
                 Delete Book
               </button>
@@ -96,7 +100,7 @@ const BookDetails = () => {
                     {/* if there is a button in form, it will close the modal */}
                     <button
                       className="btn bg-red-500 text-white hover:bg-red-700"
-                      onClick={() => dispatch(deleteBook(id))}
+                      onClick={handleDeleteBook}
                     >
                       sure, confirm delation
                     </button>
@@ -137,14 +141,12 @@ const BookDetails = () => {
 
               {user.email && (
                 <form onSubmit={handlePostComment}>
-                  <label className="text-gray-700" for="name">
+                  <label className="text-gray-700">
                     <textarea
                       className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mt-5"
                       id="comment"
                       placeholder="Enter your comment"
                       name="comment"
-                      rows="5"
-                      cols="40"
                     ></textarea>
                   </label>
                   <button className="px-4 py-2 rounded-lg bg-indigo-600 text-white">

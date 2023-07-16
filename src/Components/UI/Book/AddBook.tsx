@@ -4,19 +4,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import React from "react";
-import { FormEvent } from "react";
-import toast, { Toaster } from "react-hot-toast";
+
+import toast from "react-hot-toast";
 import { useAppSelector } from "../../../redux/hooks";
 import { usePostBookMutation } from "../../../redux/features/product/productApi";
 import { useNavigate } from "react-router-dom";
-type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 const AddBook = () => {
   const { user } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-  const [postBook, { isError, isLoading, isSuccess }] = usePostBookMutation();
-  const handleAddABook = (event: FormEvent<HTMLFormElement>) => {
+  const [postBook] = usePostBookMutation();
+  const handleAddABook = (event: any) => {
     event.preventDefault();
     const form = event.target;
     const bookName = form.bookName.value;

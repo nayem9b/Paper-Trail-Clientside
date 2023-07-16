@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from "react";
+
 import { useAppSelector } from "../../../redux/hooks";
 import { useGetWishlistQuery } from "../../../redux/features/product/productApi";
-import WishlistCard from "../Book/Wishlist/WishlistCard";
+
 import ReadlistCard from "./ReadlistCard";
 
 const Readlist = () => {
@@ -21,7 +21,7 @@ const Readlist = () => {
           Books I will read
         </h1>
         <div className="grid grid-cols-2 mx-5 gap-5 mt-5">
-          {readlist?.map((wish) => (
+          {readlist?.map((wish: { user: string | null; status: string }) => (
             <>
               {wish?.user === user.email ? (
                 <>
@@ -41,7 +41,7 @@ const Readlist = () => {
       <div className="block">
         <h1 className="text-center font-semibold text-3xl">I'm reading</h1>
         <div className="grid grid-cols-2 gap-5 mx-5 mt-5">
-          {readlist?.map((wish) => (
+          {readlist?.map((wish: { user: string | null; status: string }) => (
             <>
               {wish?.user === user.email ? (
                 <>
@@ -61,7 +61,7 @@ const Readlist = () => {
       <div className="block">
         <h1 className="text-center font-semibold text-3xl">Finished reading</h1>
         <div className="grid grid-cols-2 gap-5 mx-5 mt-5">
-          {readlist?.map((wish) => (
+          {readlist?.map((wish: { user: string | null; status: string }) => (
             <>
               {wish?.user === user.email ? (
                 <>

@@ -1,40 +1,25 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import React, { FormEvent } from "react";
+
 import { useAppDispatch } from "../../redux/hooks";
-import { createUser, loginUser } from "../../redux/features/user/userSlice";
+import { loginUser } from "../../redux/features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
-interface SignUpFormInputs {
-  email: string;
-  password: string;
-}
 const LogInForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const handleSignUp = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (event: any) => {
     event.preventDefault();
     const form = event.target;
-    const email = form?.email.value;
-    const password = form?.password.value;
-    console.log(email, password);
-    try {
-      const logger = await dispatch(
-        loginUser({ email: email, password: password })
-      );
-      if (logger?.error?.name) {
-        toast.error("Failed to login");
-      } else {
-        toast.success("Logged in");
-        form.reset();
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const email = form?.email?.value;
+    const password = form?.password?.value;
+    await dispatch(loginUser({ email: email, password: password }));
+    toast.success("Logged in");
+    form.reset();
+    navigate("/");
   };
   return (
     <div>
